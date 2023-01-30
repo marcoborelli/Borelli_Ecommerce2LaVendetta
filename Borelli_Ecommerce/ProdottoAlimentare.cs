@@ -19,7 +19,7 @@ namespace Borelli_Ecommerce {
             GestisciPrezzo(this.Sconto);
         }
 
-        protected int CalcolaGiorniDifferenza() {
+        public int CalcolaGiorniDifferenza() {
             var oggi = DateTime.Now;
             var differenza = oggi - this.DataScadenza;
 

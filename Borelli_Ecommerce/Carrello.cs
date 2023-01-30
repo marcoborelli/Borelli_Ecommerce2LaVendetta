@@ -60,9 +60,20 @@ namespace Borelli_Ecommerce {
                 } else if (ind1 != -1 && !p.Equals(_prod[ind1])) {
                     throw new Exception("Non si possono metere due id uguali ma prodotti con caratteristiche diverse");
                 } else {
-                    _prod[this.NumProdotti] = p;
-                    _qta[this.NumProdotti] = 1;
-                    this.NumProdotti++;
+                    if (p.GetType() == typeof(ProdottoAlimentare)) {
+                        ProdottoAlimentare pa = (ProdottoAlimentare)p;
+                        if (pa.CalcolaGiorniDifferenza() > 0) {
+                            _prod[this.NumProdotti] = pa;
+                            _qta[this.NumProdotti] = 1;
+                            this.NumProdotti++;
+                        } else {
+                            throw new Exception("Non si può inserire un prodotto scaduto");
+                        }
+                    } else {
+                        _prod[this.NumProdotti] = p;
+                        _qta[this.NumProdotti] = 1;
+                        this.NumProdotti++;
+                    }
                 }
 
             } else {

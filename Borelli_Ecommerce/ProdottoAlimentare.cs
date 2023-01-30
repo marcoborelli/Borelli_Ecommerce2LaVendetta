@@ -15,10 +15,22 @@ namespace Borelli_Ecommerce {
             _ingredienti = new string[MAXX];
             this.DataScadenza = dataScad;
             AggiungiIngredienti(ingred);
+            GestisciPrezzo();
         }
 
-        public void AggiungiIngredienti (string ingr) {
-            if(this.NumeroIngredienti < MAXX) {
+        protected int CalcolaGiorniDifferenza() {
+            var oggi = DateTime.Now;
+            var differenza = oggi - this.DataScadenza;
+
+            return (int)differenza.Days;
+        }
+        private void GestisciPrezzo() {
+            if (CalcolaGiorniDifferenza() > 7) {
+                this.Prezzo /= 2;
+            }
+        }
+        public void AggiungiIngredienti(string ingr) {
+            if (this.NumeroIngredienti < MAXX) {
                 InserisciSeStringaValida(ref _ingredienti[NumeroIngredienti], ingr, $"Ingrediente singolo");
                 this.NumeroIngredienti++;
             } else {

@@ -10,6 +10,7 @@ namespace Borelli_Ecommerce {
 
         public ProdottoElettronico(string id, string nome, string produttore, string descr, float prezzo, string _codiceMod) :base(id, nome, produttore, descr, prezzo) {
             this.CodiceModello = _codiceMod;
+            GestisciPrezzo();
         }
         public string CodiceModello {
             get {
@@ -20,6 +21,12 @@ namespace Borelli_Ecommerce {
             }
         }
 
+        public void GestisciPrezzo() {
+            DateTime d = DateTime.Now;
+            if ($"{d.DayOfWeek}" == "Monday") {
+                this.Prezzo -= (5 * this.Prezzo) / 100; 
+            }
+        }
 
     }
 }

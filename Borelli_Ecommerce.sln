@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borelli_Ecommerce", "Borelli_Ecommerce\Borelli_Ecommerce.csproj", "{B80424C6-87AD-4DE6-AD9C-4DCF5B58077A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B80424C6-87AD-4DE6-AD9C-4DCF5B58077A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B80424C6-87AD-4DE6-AD9C-4DCF5B58077A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B80424C6-87AD-4DE6-AD9C-4DCF5B58077A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B80424C6-87AD-4DE6-AD9C-4DCF5B58077A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CDA70F1-A943-4089-B68B-056278888BEA}
+	EndGlobalSection
+EndGlobal

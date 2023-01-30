@@ -14,7 +14,7 @@ namespace Borelli_Ecommerce
     {
         int contRapid = 0;
         bool firsTime = true;
-        Prodotto[] prod = new Prodotto[999];
+        ProdottoGenerico[] prod = new ProdottoGenerico[999];
         Carrello carrello = new Carrello("CARRELLO1");
         Random rand = new Random();
 
@@ -41,7 +41,7 @@ namespace Borelli_Ecommerce
         }
         private void button2_Click(object sender, EventArgs e)//inserimento rapido
         {
-            prod[contRapid] = new Prodotto($"ID{contRapid}", $"NOME{contRapid}", $"PRODUTTORE{contRapid}", $"PRODOTTO MOLTO BELO{contRapid}", rand.Next(0,999));
+            prod[contRapid] = new ProdottoGenerico($"ID{contRapid}", $"NOME{contRapid}", $"PRODUTTORE{contRapid}", $"PRODOTTO MOLTO BELO{contRapid}", rand.Next(0,999));
             carrello.Aggiungi(prod[contRapid]);
             contRapid++;
             Form1_Load(sender, e);
@@ -60,7 +60,7 @@ namespace Borelli_Ecommerce
                 }
                 
                 
-                prod[contRapid] = new Prodotto($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text));
+                prod[contRapid] = new ProdottoGenerico($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text));
                 carrello.Aggiungi(prod[contRapid]);
                 contRapid++;
             }
@@ -77,7 +77,7 @@ namespace Borelli_Ecommerce
             {
                 for (int i = 0; i < listView1.SelectedItems.Count; i++)
                 {
-                    Prodotto p = CreaProdTemp(listView1.SelectedItems[i].SubItems[0].Text, listView1.SelectedItems[i].SubItems[1].Text, listView1.SelectedItems[i].SubItems[2].Text, listView1.SelectedItems[i].SubItems[3].Text, float.Parse(listView1.SelectedItems[i].SubItems[4].Text));
+                    ProdottoGenerico p = CreaProdTemp(listView1.SelectedItems[i].SubItems[0].Text, listView1.SelectedItems[i].SubItems[1].Text, listView1.SelectedItems[i].SubItems[2].Text, listView1.SelectedItems[i].SubItems[3].Text, float.Parse(listView1.SelectedItems[i].SubItems[4].Text));
                     carrello.Rimuovi(p);
                 }
                 Form1_Load(sender, e);
@@ -89,16 +89,16 @@ namespace Borelli_Ecommerce
             Form1_Load(sender, e);
         }
 
-        public Prodotto CreaProdTemp(string id, string nome,string prod,string descr,float prezz)
+        public ProdottoGenerico CreaProdTemp(string id, string nome,string prod,string descr,float prezz)
         {
-            Prodotto p = new Prodotto(id, nome, prod, descr, prezz);
+            ProdottoGenerico p = new ProdottoGenerico(id, nome, prod, descr, prezz);
             return p;
         }
 
         public static void StampaElementi(ListView listino, Carrello carr)
         {
             listino.Items.Clear();
-            Prodotto[] prod = carr.Prod;
+            ProdottoGenerico[] prod = carr.Prod;
             int i = 0;
             while (prod[i]!=null)
             {

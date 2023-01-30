@@ -8,13 +8,13 @@ namespace Borelli_Ecommerce {
     public class Carrello {
         private string _id;
         private const int MAX = 999;
-        private Prodotto[] _prod;
+        private ProdottoGenerico[] _prod;
         private int[] _qta;
         private int _numProdotti;
 
         public Carrello(string id) {
             this.Id = id;
-            _prod = new Prodotto[MAX];
+            _prod = new ProdottoGenerico[MAX];
             _qta = new int[MAX];
             Svuota();//inizializzo il vettore vuoto
         }
@@ -35,7 +35,7 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        public void Rimuovi(Prodotto p) {
+        public void Rimuovi(ProdottoGenerico p) {
             int ind1 = Esiste(p);
             if (ind1 != -1) {
                 for (int i = ind1; i < _prod.Length - 1; i++) {
@@ -52,7 +52,7 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        public void Aggiungi(Prodotto p) {
+        public void Aggiungi(ProdottoGenerico p) {
             if (p != null) {
                 int ind1 = Esiste(p);
                 if (ind1 != -1 && p.Equals(_prod[ind1])) {
@@ -99,13 +99,13 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        public Prodotto[] Prod {
+        public ProdottoGenerico[] Prod {
             get {
                 return _prod;
             }
         }
 
-        private int Esiste(Prodotto q) {
+        private int Esiste(ProdottoGenerico q) {
             for (int i = 0; i < _prod.Length; i++) {
                 if (_prod[i] != null && _prod[i].Id == q.Id)
                     return i;

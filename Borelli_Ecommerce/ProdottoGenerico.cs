@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borelli_Ecommerce {
-    public class Prodotto {
+    public class ProdottoGenerico {
         private string _id, _nome, _produttore, _descrizione;
         private float _prezzo;
 
-        public Prodotto(string id, string nome, string prod, string descr, float prezzo) {
+        public ProdottoGenerico(string id, string nome, string produt, string descr, float prezzo) {
             Id = id;
             Nome = nome;
-            Produttore = prod;
+            Produttore = produt;
             Descrizione = descr;
             Prezzo = prezzo;
         }
@@ -82,13 +82,21 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        public bool Equals(Prodotto p) {
+        public bool Equals(ProdottoGenerico p) {
             if (p == null) {
                 return false;
             } else if (p == this) {
                 return true;
             } else {
                 return (p.Nome == this.Nome && p.Id == this.Id && p.Prezzo == this.Prezzo);
+            }
+        }
+
+        protected void InserisciSeStringaValida(ref string campo, string val, string perErrore) {
+            if (!String.IsNullOrWhiteSpace(val)) {
+                campo = val;
+            } else {
+                throw new Exception($"Inserire il campo \"{perErrore}\" valido");
             }
         }
     }

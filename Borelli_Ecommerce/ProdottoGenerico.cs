@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Borelli_Ecommerce {
     public class ProdottoGenerico {
         private string _id, _nome, _produttore, _descrizione;
-        private float _prezzo;
+        private float _prezzo, _sconto;
 
         public ProdottoGenerico(string id, string nome, string produt, string descr, float prezzo) {
             Id = id;
@@ -27,6 +27,15 @@ namespace Borelli_Ecommerce {
                 } else {
                     throw new Exception("Il prezzo deve essere positivo");
                 }
+            }
+        }
+
+        public float Sconto {
+            get {
+                return _sconto;
+            }
+            set {
+                SettaSeMaggioreDiZeroMinoreDiCento(ref _sconto, value, "Sconto");
             }
         }
 
@@ -97,6 +106,14 @@ namespace Borelli_Ecommerce {
                 campo = val;
             } else {
                 throw new Exception($"Inserire il campo \"{perErrore}\" valido");
+            }
+        }
+
+        protected void SettaSeMaggioreDiZeroMinoreDiCento(ref float campo, float val, string nomeCampo) {
+            if (val > 0 && val < 100) {
+                campo = val;
+            } else {
+                throw new Exception($"Il campo \"{nomeCampo}\" deve essere maggiore di 0 e minore di 100");
             }
         }
     }

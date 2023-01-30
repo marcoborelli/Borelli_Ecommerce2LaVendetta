@@ -8,14 +8,15 @@ namespace Borelli_Ecommerce {
     public class ProdottoAlimentare : ProdottoGenerico {
         private DateTime _dataScadenza;
         private const int MAXX = 10;
-        private int _numeroIngredienti;
+        private float _numeroIngredienti;
         private string[] _ingredienti;
 
         public ProdottoAlimentare(string id, string nome, string produt, string descr, float prezzo, DateTime dataScad, string[] ingred) : base(id, nome, produt, descr, prezzo) {
             _ingredienti = new string[MAXX];
             this.DataScadenza = dataScad;
+            this.Sconto = 50;
             AggiungiIngredienti(ingred);
-            GestisciPrezzo();
+            GestisciPrezzo(this.Sconto);
         }
 
         protected int CalcolaGiorniDifferenza() {
@@ -24,14 +25,14 @@ namespace Borelli_Ecommerce {
 
             return (int)differenza.Days;
         }
-        private void GestisciPrezzo() {
-            if (CalcolaGiorniDifferenza() > 7) {
-                this.Prezzo /= 2;
+        private void GestisciPrezzo(float sconto) {
+            if (CalcolaGiorniDifferenza() < 7) {
+                this.Prezzo -= (sconto * this.Prezzo) / 100;
             }
         }
         public void AggiungiIngredienti(string ingr) {
             if (this.NumeroIngredienti < MAXX) {
-                InserisciSeStringaValida(ref _ingredienti[NumeroIngredienti], ingr, $"Ingrediente singolo");
+                InserisciSeStringaValida(ref _ingredienti[(int)NumeroIngredienti], ingr, $"Ingrediente singolo");
                 this.NumeroIngredienti++;
             } else {
                 throw new Exception("Limite array superato in positivo");
@@ -61,21 +62,17 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        public int NumeroIngredienti {
+        public float NumeroIngredienti {
             get {
                 return _numeroIngredienti;
             }
             private set {
-                if (value >= 0) {
-                    _numeroIngredienti = value;
-                } else {
-                    throw new Exception("Limite array superato in negativo");
-                }
+                SettaSeMaggioreDiZeroMinoreDiMax(ref _numeroIngredienti, value, "Numero Ingredienti", 9999);
             }
         }
         public string[] Ingredienti {
             get {
-                string[] temp = new string[this.NumeroIngredienti];
+                string[] temp = new string[(int)this.NumeroIngredienti];
                 for (int i = 0; i < temp.Length; i++) {
                     temp[i] = _ingredienti[i];
                 }

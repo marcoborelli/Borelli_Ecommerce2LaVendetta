@@ -35,7 +35,7 @@ namespace Borelli_Ecommerce {
                 return _sconto;
             }
             set {
-                SettaSeMaggioreDiZeroMinoreDiCento(ref _sconto, value, "Sconto");
+                SettaSeMaggioreDiZeroMinoreDiMax(ref _sconto, value, "Sconto",100);
             }
         }
 
@@ -109,8 +109,8 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        protected void SettaSeMaggioreDiZeroMinoreDiCento(ref float campo, float val, string nomeCampo) {
-            if (val > 0 && val < 100) {
+        protected void SettaSeMaggioreDiZeroMinoreDiMax(ref float campo, float val, string nomeCampo, int max) {
+            if (val > 0 && val < max) {
                 campo = val;
             } else {
                 throw new Exception($"Il campo \"{nomeCampo}\" deve essere maggiore di 0 e minore di 100");

@@ -8,10 +8,9 @@ namespace Borelli_Ecommerce {
     public class ProdottoElettronico : ProdottoGenerico {
         private string _codiceModello;
 
-        public ProdottoElettronico(string id, string nome, string produttore, string descr, float prezzo, string _codiceMod) :base(id, nome, produttore, descr, prezzo) {
+        public ProdottoElettronico(string id, string nome, string produttore, string descr, float prezzo, string _codiceMod) : base(id, nome, produttore, descr, prezzo) {
             this.CodiceModello = _codiceMod;
             this.Sconto = 5;
-            GestisciPrezzo(this.Sconto);
         }
         public string CodiceModello {
             get {
@@ -22,10 +21,12 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        public void GestisciPrezzo(float sconto) {
+        public override float CalcolaPrezzoFinale() {
             DateTime d = DateTime.Now;
             if ($"{d.DayOfWeek}" == "Monday") {
-                this.Prezzo -= (sconto * this.Prezzo) / 100; 
+                return this.Prezzo - ((this.Sconto * this.Prezzo) / 100);
+            } else {
+                return this.Prezzo;
             }
         }
 

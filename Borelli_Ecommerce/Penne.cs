@@ -11,6 +11,7 @@ namespace Borelli_Ecommerce {
             this.Funzionamento = funz;
         }
 
+        //properties
         public string Funzionamento {
             get {
                 return _funzionamento;

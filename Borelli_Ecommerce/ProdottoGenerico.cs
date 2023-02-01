@@ -17,19 +17,15 @@ namespace Borelli_Ecommerce {
             Prezzo = prezzo;
         }
 
+        //properties
         public float Prezzo {
             get {
                 return _prezzo;
             }
             set {
-                if (value > 0) {
-                    _prezzo = value;
-                } else {
-                    throw new Exception("Il prezzo deve essere positivo");
-                }
+                SettaSeMaggioreDiZeroMinoreDiMax(ref _prezzo, value, "Prezzo", int.MaxValue);
             }
         }
-
         public float Sconto {
             get {
                 return _sconto;
@@ -38,59 +34,39 @@ namespace Borelli_Ecommerce {
                 SettaSeMaggioreDiZeroMinoreDiMax(ref _sconto, value, "Sconto",100);
             }
         }
-
         public string Id {
             get {
                 return _id;
             }
             private set {
-                if (value != null) {
-                    _id = value;
-                } else {
-                    throw new Exception("Inserire un id correggiuto");
-                }
+                InserisciSeStringaValida(ref _id, value, "Id");
             }
         }
-
         public string Nome {
             get {
                 return _nome;
             }
             private set {
-                if (value != null) {
-                    _nome = value;
-                } else {
-                    throw new Exception("Inserire un nome correggiuto");
-                }
+                InserisciSeStringaValida(ref _nome, value, "Nome");
             }
         }
-
         public string Produttore {
             get {
                 return _produttore;
             }
             private set {
-                if (value != null) {
-                    _produttore = value;
-                } else {
-                    throw new Exception("Inserire un produttore correggiuto");
-                }
+                InserisciSeStringaValida(ref _produttore, value, "Produttore");
             }
         }
-
         public string Descrizione {
             get {
                 return _descrizione;
             }
             private set {
-                if (value != null) {
-                    _descrizione = value;
-                } else {
-                    throw new Exception("Inserire una descrizione correggiuta");
-                }
+                InserisciSeStringaValida(ref _descrizione, value, "Descrizione");
             }
         }
-
+        //funzioni generali
         public bool Equals(ProdottoGenerico p) {
             if (p == null) {
                 return false;
@@ -99,6 +75,10 @@ namespace Borelli_Ecommerce {
             } else {
                 return (p.Nome == this.Nome && p.Id == this.Id && p.Prezzo == this.Prezzo);
             }
+        }
+
+        public virtual float CalcolaPrezzoFinale() {
+            return this.Prezzo;
         }
 
         protected void InserisciSeStringaValida(ref string campo, string val, string perErrore) {
@@ -113,7 +93,7 @@ namespace Borelli_Ecommerce {
             if (val > 0 && val < max) {
                 campo = val;
             } else {
-                throw new Exception($"Il campo \"{nomeCampo}\" deve essere maggiore di 0 e minore di 100");
+                throw new Exception($"Il campo \"{nomeCampo}\" deve essere maggiore di 0 e minore di {max}");
             }
         }
     }

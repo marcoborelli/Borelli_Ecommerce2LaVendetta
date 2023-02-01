@@ -16,18 +16,52 @@ namespace Borelli_Ecommerce {
             this.DataScadenza = dataScad;
             this.Sconto = 50;
             AggiungiIngredienti(ingred);
-            GestisciPrezzo(this.Sconto);
         }
 
+        //properties
+        public DateTime DataScadenza {
+            get {
+                return _dataScadenza;
+            }
+            set {
+                if (value != null) {
+                    _dataScadenza = value;
+                } else {
+                    throw new Exception("Inserire una data di scadenza valida");
+                }
+            }
+        }
+        public float NumeroIngredienti {
+            get {
+                return _numeroIngredienti;
+            }
+            private set {
+                SettaSeMaggioreDiZeroMinoreDiMax(ref _numeroIngredienti, value, "Numero Ingredienti", 9999);
+            }
+        }
+        public string[] Ingredienti {
+            get {
+                string[] temp = new string[(int)this.NumeroIngredienti];
+                for (int i = 0; i < temp.Length; i++) {
+                    temp[i] = _ingredienti[i];
+                }
+
+                return temp;
+            }
+        }
+
+        //funzioni specifiche
         public int CalcolaGiorniDifferenza() {
             var oggi = DateTime.Now;
             var differenza = oggi - this.DataScadenza;
 
             return (int)differenza.Days;
         }
-        private void GestisciPrezzo(float sconto) {
+        public override float CalcolaPrezzoFinale() {
             if (CalcolaGiorniDifferenza() < 7) {
-                this.Prezzo -= (sconto * this.Prezzo) / 100;
+                return this.Prezzo - ((this.Sconto * this.Prezzo) / 100);
+            } else {
+                return this.Prezzo;
             }
         }
         public void AggiungiIngredienti(string ingr) {
@@ -49,37 +83,7 @@ namespace Borelli_Ecommerce {
                 }
             }
         }
-        public DateTime DataScadenza {
-            get {
-                return _dataScadenza;
-            }
-            set {
-                if (value != null) {
-                    _dataScadenza = value;
-                } else {
-                    throw new Exception("Inserire una data di scadenza valida");
-                }
-            }
-        }
-
-        public float NumeroIngredienti {
-            get {
-                return _numeroIngredienti;
-            }
-            private set {
-                SettaSeMaggioreDiZeroMinoreDiMax(ref _numeroIngredienti, value, "Numero Ingredienti", 9999);
-            }
-        }
-        public string[] Ingredienti {
-            get {
-                string[] temp = new string[(int)this.NumeroIngredienti];
-                for (int i = 0; i < temp.Length; i++) {
-                    temp[i] = _ingredienti[i];
-                }
-
-                return temp;
-            }
-        }
+        
 
     }
 }

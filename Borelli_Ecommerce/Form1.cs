@@ -42,7 +42,7 @@ namespace Borelli_Ecommerce {
                 comboBox1.Items.Add("FoglioDiCarta");
 
             }
-            StampaElementi(listView1, carrello);
+            StampaElementi(listView1,labelPrezzo, carrello);
         }
         private void button2_Click(object sender, EventArgs e) {//inserimento rapido
             prod[contRapid] = new ProdottoElettronico($"ID{contRapid}", $"NOME{contRapid}", $"PRODUTTORE{contRapid}", $"PRODOTTO MOLTO BELO{contRapid}", rand.Next(0, 999), $"SPECIFICO{contRapid}");
@@ -95,13 +95,24 @@ namespace Borelli_Ecommerce {
             Form1_Load(sender, e);
         }
 
-        public static void StampaElementi(ListView listino, Carrello carr) {
+        public static void StampaElementi(ListView listino, Label labellina,Carrello carr) {
             listino.Items.Clear();
             ProdottoGenerico[] prod = carr.Prod;
             int[] qta = carr.Qta;
+            float prezzoTot=0, prezzoScontato=0;
+            bool dispElet = false;
 
             for (int i = 0; i < prod.Length; i++) {
+                if (prod[i].GetType() == typeof(ProdottoElettronico)) { /*se c'è almeno un dispostivo elettronico devo scontare tutto del 5%*/
+                    dispElet = true;
+                }
                 string[] temp = prod[i].ToString().Split(';');
+
+                for (int j = 0; j < qta[i]; j++) {
+                    prezzoTot += float.Parse(temp[4]);
+                    prezzoScontato += float.Parse(temp[5]);
+                }
+
                 string[] def = new string[temp.Length + 1];
 
                 for (int j = 0; j < temp.Length; j++) {
@@ -112,6 +123,12 @@ namespace Borelli_Ecommerce {
                 ListViewItem item = new ListViewItem(def);
                 listino.Items.Add(item);
             }
+
+            if (dispElet) {
+                prezzoScontato-=(prezzoScontato*5)/100;
+            }
+
+            labellina.Text = $"PREZZO INTERO: €{prezzoTot}\nPREZZO SCONTATO: €{prezzoScontato}";
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e) {

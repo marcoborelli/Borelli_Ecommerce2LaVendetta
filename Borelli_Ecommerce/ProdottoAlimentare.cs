@@ -78,7 +78,7 @@ namespace Borelli_Ecommerce {
             }
             temp = temp.Substring(0, temp.Length - 1);/*per togliere virgola finale*/
 
-            return $"{base.ToString()};{temp};{DataScadenza}";
+            return $"{base.ToString()};{temp} SCADE IL:{DataScadenza}";
         }
         /*fine funzioni generali*/
 
@@ -90,7 +90,7 @@ namespace Borelli_Ecommerce {
             return (int)differenza.Days;
         }
         public override float CalcolaPrezzoFinale() {
-            if (CalcolaGiorniDifferenza() < 7) {
+            if (CalcolaGiorniDifferenza() > 7) {
                 return this.Prezzo - ((this.Sconto * this.Prezzo) / 100);
             } else {
                 return this.Prezzo;

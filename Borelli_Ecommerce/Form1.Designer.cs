@@ -49,6 +49,7 @@
             this.labelInfoAggiuntive = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.labelData = new System.Windows.Forms.Label();
+            this.labelPrezzo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox1
@@ -231,11 +232,21 @@
             this.labelData.Size = new System.Drawing.Size(0, 13);
             this.labelData.TabIndex = 20;
             // 
+            // labelPrezzo
+            // 
+            this.labelPrezzo.AutoSize = true;
+            this.labelPrezzo.Location = new System.Drawing.Point(12, 429);
+            this.labelPrezzo.Name = "labelPrezzo";
+            this.labelPrezzo.Size = new System.Drawing.Size(28, 13);
+            this.labelPrezzo.TabIndex = 21;
+            this.labelPrezzo.Text = "AAA";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(943, 498);
+            this.Controls.Add(this.labelPrezzo);
             this.Controls.Add(this.labelData);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.labelInfoAggiuntive);
@@ -288,6 +299,7 @@
         private System.Windows.Forms.Label labelInfoAggiuntive;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Label labelData;
+        private System.Windows.Forms.Label labelPrezzo;
     }
 }
 

@@ -36,6 +36,7 @@ namespace Borelli_Ecommerce
                 listView1.Columns.Add("DESCRIZIONE", 220);
                 listView1.Columns.Add("PREZZO", 50);
                 listView1.Columns.Add("QTA", 40);
+
             }
             StampaElementi(listView1, carrello);
         }
@@ -110,6 +111,17 @@ namespace Borelli_Ecommerce
             }
         }
 
+        private void textBox6_TextChanged(object sender, EventArgs e) {
+            if (textInfoAggiuntive.Text[textInfoAggiuntive.Text.Length - 1] == '\n') {
+                textInfoAggiuntive.Height += (int)Font.GetHeight();
+                monthCalendar1.Location = new Point(monthCalendar1.Location.X, monthCalendar1.Location.Y + (int)Font.GetHeight());
+                labelData.Location = new Point(labelData.Location.X, labelData.Location.Y + (int)Font.GetHeight());
+            }
+        }
 
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e) {
+            string temp= monthCalendar1.SelectionRange.Start.ToString();
+            labelData.Text = temp.Substring(0, temp.Length - 9);
+        }
     }
 }

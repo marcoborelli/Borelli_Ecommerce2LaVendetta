@@ -12,6 +12,8 @@ namespace Borelli_Ecommerce {
             this.CodiceModello = _codiceMod;
             this.Sconto = 5;
         }
+
+        /*property*/
         public string CodiceModello {
             get {
                 return _codiceModello;
@@ -20,6 +22,22 @@ namespace Borelli_Ecommerce {
                 InserisciSeStringaValida(ref _codiceModello, value, "Codice Modello");
             }
         }
+        /*fine properties*/
+
+        /*funzioni generali*/
+        public bool Equals(ProdottoElettronico p) {
+            if (p == null) {
+                return false;
+            } else if (p == this) {
+                return true;
+            } else {
+                return (p.Nome == this.Nome && p.Id == this.Id && p.CodiceModello == this.CodiceModello);
+            }
+        }
+        public override string ToString() {
+            return $"{base.ToString()};{CodiceModello}";
+        }
+        /*fine funzioni generali*/
 
         public override float CalcolaPrezzoFinale() {
             DateTime d = DateTime.Now;

@@ -49,6 +49,37 @@ namespace Borelli_Ecommerce {
                 return temp;
             }
         }
+        /*fine properties*/
+
+        /*funzioni generali*/
+        public bool Equals(ProdottoAlimentare p) {
+            if (p == null) {
+                return false;
+            } else if (p == this) {
+                return true;
+            } else {
+                if (p.Nome != this.Nome || p.Id != this.Id || p.Ingredienti.Length!= this.Ingredienti.Length) {
+                    return false;
+                } else {
+                    string [] ingrP = p.Ingredienti; /*faccio così di modo che li calcoli solo una volta, se lo facessi inline ogni volta starebbe a ricalcolarmi l'array*/
+                    for (int i = 0; i < NumeroIngredienti; i++) {
+                        if (_ingredienti[i]!= ingrP[i]) 
+                            return false;
+                    }
+                    return true; /*se sono arrivato fino a qui vuol dire che sono tutti uguali*/
+                }
+            }
+        }
+        public override string ToString() {
+            string temp = "";
+            for(int i=0;i< NumeroIngredienti; i++) {
+                temp += $"{_ingredienti[i]},";
+            }
+            temp = temp.Substring(0, temp.Length - 1);/*per togliere virgola finale*/
+
+            return $"{base.ToString()};{temp};{DataScadenza}";
+        }
+        /*fine funzioni generali*/
 
         //funzioni specifiche
         public int CalcolaGiorniDifferenza() {

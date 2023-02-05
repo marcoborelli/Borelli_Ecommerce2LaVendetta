@@ -78,8 +78,7 @@ namespace Borelli_Ecommerce {
             //MessageBox.Show(prod[0].ToString());
             if (listView1.SelectedItems.Count > 0) {
                 for (int i = 0; i < listView1.SelectedItems.Count; i++) {
-                    ProdottoGenerico p = CreaProdTemp(listView1.SelectedItems[i].SubItems[0].Text, listView1.SelectedItems[i].SubItems[1].Text, listView1.SelectedItems[i].SubItems[2].Text, listView1.SelectedItems[i].SubItems[3].Text, float.Parse(listView1.SelectedItems[i].SubItems[4].Text));
-                    //ProdottoGenerico p = new ProdottoGenerico();
+                    ProdottoGenerico p = new ProdottoGenerico(listView1.SelectedItems[i].SubItems[0].Text, listView1.SelectedItems[i].SubItems[1].Text);
                     carrello.Rimuovi(p);
                 }
                 Form1_Load(sender, e);
@@ -88,11 +87,6 @@ namespace Borelli_Ecommerce {
         private void button4_Click(object sender, EventArgs e) {//svuota
             carrello.Svuota();
             Form1_Load(sender, e);
-        }
-
-        public ProdottoGenerico CreaProdTemp(string id, string nome, string prod, string descr, float prezz) {
-            ProdottoGenerico p = new ProdottoGenerico(id, nome, prod, descr, prezz);
-            return p;
         }
 
         public static void StampaElementi(ListView listino, Carrello carr) {

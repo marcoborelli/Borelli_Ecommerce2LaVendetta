@@ -10,7 +10,6 @@ namespace Borelli_Ecommerce {
         public ProdottiCancelleria(string id, string nome, string produt, string descr, float prezzo) : base(id, nome, produt, descr, prezzo) {
             this.Sconto = 3;
         }
-
         public override float CalcolaPrezzoFinale() {
             if (CalcolaGiorno() % 2 == 0) {
                 return this.Prezzo - ((this.Sconto * this.Prezzo) / 100);

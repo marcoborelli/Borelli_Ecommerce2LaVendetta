@@ -80,6 +80,9 @@ namespace Borelli_Ecommerce {
                 return (p.Nome == this.Nome && p.Id == this.Id);
             }
         }
+        public override string ToString() {
+            return $"{Id};{Nome};{Produttore};{Descrizione};{Prezzo}";
+        }
 
         public virtual float CalcolaPrezzoFinale() {
             return this.Prezzo;

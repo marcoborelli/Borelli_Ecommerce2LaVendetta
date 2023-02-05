@@ -20,5 +20,21 @@ namespace Borelli_Ecommerce {
                 InserisciSeStringaValida(ref _funzionamento, value, "Funzionamento");
             }
         }
+        /*fine properties*/
+
+        /*funzioni generali*/
+        public bool Equals(Penne p) {
+            if (p == null) {
+                return false;
+            } else if (p == this) {
+                return true;
+            } else {
+                return (p.Nome == this.Nome && p.Id == this.Id && p.Funzionamento == this.Funzionamento);
+            }
+        }
+        public override string ToString() {
+            return $"{base.ToString()};{Funzionamento}";
+        }
+        /*fine funzioni generali*/
     }
 }

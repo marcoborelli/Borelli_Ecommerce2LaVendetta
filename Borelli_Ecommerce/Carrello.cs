@@ -54,28 +54,23 @@ namespace Borelli_Ecommerce {
 
         public void Aggiungi(ProdottoGenerico p) {
             if (p != null) {
-                int ind1 = Esiste(p);
-                if (ind1 != -1 && p.Equals(_prod[ind1])) {
+                int ind1 = Esiste(p);//prima verifico se già esiste
+
+                if (ind1 != -1) {
                     _qta[ind1]++;
-                } else if (ind1 != -1 && !p.Equals(_prod[ind1])) {
-                    throw new Exception("Non si possono metere due id uguali ma prodotti con caratteristiche diverse");
                 } else {
+
                     if (p.GetType() == typeof(ProdottoAlimentare)) {
                         ProdottoAlimentare pa = (ProdottoAlimentare)p;
-                        if (pa.CalcolaGiorniDifferenza() > 0) {
-                            _prod[this.NumProdotti] = pa;
-                            _qta[this.NumProdotti] = 1;
-                            this.NumProdotti++;
-                        } else {
+                        if (pa.CalcolaGiorniDifferenza() < 0) {
                             throw new Exception("Non si può inserire un prodotto scaduto");
                         }
-                    } else {
-                        _prod[this.NumProdotti] = p;
-                        _qta[this.NumProdotti] = 1;
-                        this.NumProdotti++;
                     }
-                }
 
+                    _prod[this.NumProdotti] = p;
+                    _qta[this.NumProdotti] = 1;
+                    this.NumProdotti++;
+                }
             } else {
                 throw new Exception("Inserire un prodotto valido");
             }
@@ -86,7 +81,7 @@ namespace Borelli_Ecommerce {
                 return _numProdotti;
             }
             set {
-                if (value < MAX && value >=0) {
+                if (value < MAX && value >= 0) {
                     _numProdotti = value;
                 } else {
                     throw new Exception("Limite array superato in positivo o negativo");
@@ -117,7 +112,7 @@ namespace Borelli_Ecommerce {
         }
 
         private int Esiste(ProdottoGenerico q) {
-            for (int i = 0; i < _prod.Length; i++) {
+            for (int i = 0; i < NumProdotti; i++) {
                 if (_prod[i].Equals(q))
                     return i;
             }

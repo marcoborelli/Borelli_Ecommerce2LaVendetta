@@ -19,39 +19,54 @@ namespace Borelli_Ecommerce {
             Svuota();//inizializzo il vettore vuoto
         }
 
-        public void Svuota() {
-            for (int i = 0; i < _prod.Length; i++) {
-                _prod[i] = null;
-                _qta[i] = 0;
+        /*properties*/
+        private int NumProdotti {
+            get {
+                return _numProdotti;
             }
-            this.NumProdotti = 0;
-        }
-
-        public int VisualizzaQtaProdotti(int ind) {
-            if (_qta[ind] != 0) {
-                return _qta[ind];
-            } else {
-                throw new Exception("Non è presente nessun valore a questo indice");
+            set {
+                SettaSeMaggioreDiZeroMinoreDiMax(ref  _numProdotti, value, "Numero Prodotti", MAX);
             }
         }
-
-        public void Rimuovi(ProdottoGenerico p) {
-            int ind1 = Esiste(p);
-            if (ind1 != -1) {
-                for (int i = ind1; i < _prod.Length - 1; i++) {
-                    _prod[i] = _prod[i + 1];
-                    _qta[i] = _qta[i + 1];
+        public string Id {
+            get {
+                return _id;
+            }
+            private set {
+                InserisciSeStringaValida(ref _id, value, "Id");
+            }
+        }
+        public int[] Qta {
+            get {
+                int[] temp = new int[NumProdotti];
+                for (int i = 0; i < NumProdotti; i++) {
+                    temp[i] = _qta[i];
                 }
-
-                _prod[_prod.Length - 1] = null;
-                _qta[_qta.Length - 1] = 0;
-
-                this.NumProdotti--;
-            } else {
-                throw new Exception("Inserire un prodotto valido");
+                return temp;
             }
         }
+        public ProdottoGenerico[] Prod {
+            get {
+                ProdottoGenerico[] temp = new ProdottoGenerico[NumProdotti];
+                for (int i = 0; i < NumProdotti; i++) {
+                    temp[i] = _prod[i];
+                }
+                return temp;
+            }
+        }
+        /*fine properties*/
 
+        /*funzioni generali*/
+        private int Esiste(ProdottoGenerico q) {
+            for (int i = 0; i < NumProdotti; i++) {
+                if (_prod[i].Equals(q))
+                    return i;
+            }
+            return -1;
+        }
+        /*fine funzioni generali*/
+
+        /*funzioni specifiche*/
         public void Aggiungi(ProdottoGenerico p) {
             if (p != null) {
                 int ind1 = Esiste(p);//prima verifico se già esiste
@@ -75,49 +90,52 @@ namespace Borelli_Ecommerce {
                 throw new Exception("Inserire un prodotto valido");
             }
         }
-
-        private int NumProdotti {
-            get {
-                return _numProdotti;
-            }
-            set {
-                if (value < MAX && value >= 0) {
-                    _numProdotti = value;
-                } else {
-                    throw new Exception("Limite array superato in positivo o negativo");
+        public void Rimuovi(ProdottoGenerico p) {
+            int ind1 = Esiste(p);
+            if (ind1 != -1) {
+                for (int i = ind1; i < _prod.Length - 1; i++) {
+                    _prod[i] = _prod[i + 1];
+                    _qta[i] = _qta[i + 1];
                 }
-            }
-        }
-        public int[] Qta {
-            get {
-                return _qta;
-            }
-        }
-        public string Id {
-            get {
-                return _id;
-            }
-            private set {
-                if (value != null)
-                    _id = value;
-                else
-                    throw new Exception("Inserire un id correggiuto");
-            }
-        }
 
-        public ProdottoGenerico[] Prod {
-            get {
-                return _prod;
+                _prod[_prod.Length - 1] = null;
+                _qta[_qta.Length - 1] = 0;
+
+                this.NumProdotti--;
+            } else {
+                throw new Exception("Inserire un prodotto valido");
             }
         }
-
-        private int Esiste(ProdottoGenerico q) {
+        public void Svuota() {
             for (int i = 0; i < NumProdotti; i++) {
-                if (_prod[i].Equals(q))
-                    return i;
+                _prod[i] = null;
+                _qta[i] = 0;
             }
-            return -1;
+            this.NumProdotti = 0;
+        }
+        public int VisualizzaQtaProdotti(int ind) {
+            if (_qta[ind] != 0) {
+                return _qta[ind];
+            } else {
+                throw new Exception("Non è presente nessun valore a questo indice");
+            }
+        }
+        /*fine funzioni specifiche*/
+
+        protected void InserisciSeStringaValida(ref string campo, string val, string perErrore) {
+            if (!String.IsNullOrWhiteSpace(val)) {
+                campo = val;
+            } else {
+                throw new Exception($"Inserire il campo \"{perErrore}\" valido");
+            }
         }
 
+        protected void SettaSeMaggioreDiZeroMinoreDiMax(ref int campo, int val, string nomeCampo, int max) {
+            if (val >= 0 && val < max) {
+                campo = val;
+            } else {
+                throw new Exception($"Il campo \"{nomeCampo}\" deve essere maggiore di 0 e minore di {max}");
+            }
+        }
     }
 }

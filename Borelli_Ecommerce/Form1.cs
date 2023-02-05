@@ -92,13 +92,11 @@ namespace Borelli_Ecommerce {
         public static void StampaElementi(ListView listino, Carrello carr) {
             listino.Items.Clear();
             ProdottoGenerico[] prod = carr.Prod;
-            int i = 0;
-            while (prod[i] != null) {
-                int qta = carr.VisualizzaQtaProdotti(i);
-                string[] temp = new string[] { prod[i].Id, prod[i].Nome, prod[i].Produttore, prod[i].Descrizione, $"{prod[i].Prezzo}", $"{qta}" };
+
+            for (int i = 0; i < prod.Length; i++) {
+                string[] temp = prod[i].ToString().Split(';');
                 ListViewItem item = new ListViewItem(temp);
                 listino.Items.Add(item);
-                i++;
             }
         }
 

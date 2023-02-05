@@ -58,6 +58,10 @@ namespace Borelli_Ecommerce {
                 } 
                 else if (comboBox1.Text == "ProdottoAlimentare") {
                     string[] temp = textInfoAggiuntive.Text.Split('\n');//creo array splittando grazie al ritorno a capo
+                    for (int i = 0; i < temp.Length-1; i++) {
+                        temp[i] = temp[i].Substring(0, temp[i].Length - 1);/*perchè a capo è fatto da due caratteri quindi almeno così posso rimuovere anche il secondo*/
+                    }
+
                     DateTime d = monthCalendar1.SelectionRange.Start;
                     prod[contRapid] = new ProdottoAlimentare($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), d, temp);
                 } 
@@ -111,10 +115,14 @@ namespace Borelli_Ecommerce {
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e) {
-            if (textInfoAggiuntive.Text[textInfoAggiuntive.Text.Length - 1] == '\n') {
-                textInfoAggiuntive.Height += (int)Font.GetHeight();
-                monthCalendar1.Location = new Point(monthCalendar1.Location.X, monthCalendar1.Location.Y + (int)Font.GetHeight());
-                labelData.Location = new Point(labelData.Location.X, labelData.Location.Y + (int)Font.GetHeight());
+            try {
+                if (textInfoAggiuntive.Text[textInfoAggiuntive.Text.Length - 1] == '\n') {
+                    textInfoAggiuntive.Height += (int)Font.GetHeight();
+                    monthCalendar1.Location = new Point(monthCalendar1.Location.X, monthCalendar1.Location.Y + (int)Font.GetHeight());
+                    labelData.Location = new Point(labelData.Location.X, labelData.Location.Y + (int)Font.GetHeight());
+                }
+            } catch {
+
             }
         }
 

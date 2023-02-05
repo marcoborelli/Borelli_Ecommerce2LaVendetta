@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Borelli_Ecommerce {
     public class ProdottoAlimentare : ProdottoGenerico {
@@ -36,7 +37,7 @@ namespace Borelli_Ecommerce {
                 return _numeroIngredienti;
             }
             private set {
-                SettaSeMaggioreDiZeroMinoreDiMax(ref _numeroIngredienti, value, "Numero Ingredienti", 9999);
+                SettaSeMaggioreDiZeroMinoreDiMax(ref _numeroIngredienti, value, "Numero Ingredienti", 10);
             }
         }
         public string[] Ingredienti {
@@ -58,12 +59,12 @@ namespace Borelli_Ecommerce {
             } else if (p == this) {
                 return true;
             } else {
-                if (p.Nome != this.Nome || p.Id != this.Id || p.Ingredienti.Length!= this.Ingredienti.Length) {
+                if (p.Nome != this.Nome || p.Id != this.Id || p.Ingredienti.Length != this.Ingredienti.Length) {
                     return false;
                 } else {
-                    string [] ingrP = p.Ingredienti; /*faccio così di modo che li calcoli solo una volta, se lo facessi inline ogni volta starebbe a ricalcolarmi l'array*/
+                    string[] ingrP = p.Ingredienti; /*faccio così di modo che li calcoli solo una volta, se lo facessi inline ogni volta starebbe a ricalcolarmi l'array*/
                     for (int i = 0; i < NumeroIngredienti; i++) {
-                        if (_ingredienti[i]!= ingrP[i]) 
+                        if (_ingredienti[i] != ingrP[i])
                             return false;
                     }
                     return true; /*se sono arrivato fino a qui vuol dire che sono tutti uguali*/
@@ -72,7 +73,7 @@ namespace Borelli_Ecommerce {
         }
         public override string ToString() {
             string temp = "";
-            for(int i=0;i< NumeroIngredienti; i++) {
+            for (int i = 0; i < NumeroIngredienti; i++) {
                 temp += $"{_ingredienti[i]},";
             }
             temp = temp.Substring(0, temp.Length - 1);/*per togliere virgola finale*/
@@ -105,16 +106,12 @@ namespace Borelli_Ecommerce {
         }
 
         public void AggiungiIngredienti(string[] ingredienti) {
-            for (int i = 0; i < this.NumeroIngredienti; i++) {
-                if (this.NumeroIngredienti < MAXX) {
-                    InserisciSeStringaValida(ref _ingredienti[i], ingredienti[i], $"Ingrediente {i}");
-                    this.NumeroIngredienti++;
-                } else {
-                    throw new Exception("Limite array superato in positivo");
-                }
+            for (int i = 0; i < MAXX && i < ingredienti.Length; i++) {
+                InserisciSeStringaValida(ref _ingredienti[i], ingredienti[i], $"Ingrediente {i}");
+                this.NumeroIngredienti++;
             }
         }
-        
+
 
     }
 }

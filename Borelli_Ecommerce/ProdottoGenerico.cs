@@ -17,6 +17,10 @@ namespace Borelli_Ecommerce {
             Prezzo = prezzo;
         }
 
+        public ProdottoGenerico(string id, string nome):this(id, nome, "N/A", "N/A", 1) {
+
+        }
+
         //properties
         public float Prezzo {
             get {
@@ -73,7 +77,7 @@ namespace Borelli_Ecommerce {
             } else if (p == this) {
                 return true;
             } else {
-                return (p.Nome == this.Nome && p.Id == this.Id && p.Prezzo == this.Prezzo);
+                return (p.Nome == this.Nome && p.Id == this.Id);
             }
         }
 

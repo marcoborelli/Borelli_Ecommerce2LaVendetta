@@ -118,7 +118,7 @@ namespace Borelli_Ecommerce {
 
         private int Esiste(ProdottoGenerico q) {
             for (int i = 0; i < _prod.Length; i++) {
-                if (_prod[i] != null && _prod[i].Id == q.Id)
+                if (_prod[i].Equals(q))
                     return i;
             }
             return -1;

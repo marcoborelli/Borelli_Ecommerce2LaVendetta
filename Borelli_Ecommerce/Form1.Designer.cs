@@ -187,6 +187,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(117, 21);
             this.comboBox1.TabIndex = 15;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -227,9 +228,8 @@
             this.labelData.AutoSize = true;
             this.labelData.Location = new System.Drawing.Point(158, 225);
             this.labelData.Name = "labelData";
-            this.labelData.Size = new System.Drawing.Size(89, 13);
+            this.labelData.Size = new System.Drawing.Size(0, 13);
             this.labelData.TabIndex = 20;
-            this.labelData.Text = "TITOLO CAMBIA";
             // 
             // Form1
             // 

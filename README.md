@@ -2,7 +2,7 @@
 
 ### COMPITO PER SCUOLA
 * [1] Classe ProdottoGenerico
-  * [1] ProdottiElettornici (aggiunge id specifico)
+  * [1] ProdottiElettronici (aggiunge id specifico)
   * [2] ProdottiAlimentari (aggiunge data scadenza e ingredienti)
   * [3] Cancelleria (è astratta)
     * [1] Penne (aggiunge tipo di penna)

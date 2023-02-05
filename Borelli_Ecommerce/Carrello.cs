@@ -57,13 +57,6 @@ namespace Borelli_Ecommerce {
         /*fine properties*/
 
         /*funzioni generali*/
-        private int Esiste(ProdottoGenerico q) {
-            for (int i = 0; i < NumProdotti; i++) {
-                if (_prod[i].Equals(q))
-                    return i;
-            }
-            return -1;
-        }
         /*fine funzioni generali*/
 
         /*funzioni specifiche*/
@@ -77,7 +70,7 @@ namespace Borelli_Ecommerce {
 
                     if (p.GetType() == typeof(ProdottoAlimentare)) {
                         ProdottoAlimentare pa = (ProdottoAlimentare)p;
-                        if (pa.CalcolaGiorniDifferenza() < 0) {
+                        if (pa.CalcolaGiorniDifferenza() > 0) {
                             throw new Exception("Non si può inserire un prodotto scaduto");
                         }
                     }
@@ -122,6 +115,13 @@ namespace Borelli_Ecommerce {
         }
         /*fine funzioni specifiche*/
 
+        private int Esiste(ProdottoGenerico q) {
+            for (int i = 0; i < NumProdotti; i++) {
+                if (_prod[i].Equals(q))
+                    return i;
+            }
+            return -1;
+        }
         protected void InserisciSeStringaValida(ref string campo, string val, string perErrore) {
             if (!String.IsNullOrWhiteSpace(val)) {
                 campo = val;

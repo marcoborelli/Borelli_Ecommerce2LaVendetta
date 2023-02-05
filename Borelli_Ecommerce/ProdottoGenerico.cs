@@ -81,7 +81,7 @@ namespace Borelli_Ecommerce {
             }
         }
         public override string ToString() {
-            return $"{Id};{Nome};{Produttore};{Descrizione};{Prezzo}";
+            return $"{Id};{Nome};{Produttore};{Descrizione};{Prezzo};{CalcolaPrezzoFinale()}";
         }
 
         public virtual float CalcolaPrezzoFinale() {

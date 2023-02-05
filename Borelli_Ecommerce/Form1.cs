@@ -25,12 +25,14 @@ namespace Borelli_Ecommerce {
                 listView1.FullRowSelect = true;
                 firsTime = false;
 
-                listView1.Columns.Add("ID", 60);
-                listView1.Columns.Add("NOME", 80);
-                listView1.Columns.Add("PRODUTTORE", 80);
-                listView1.Columns.Add("DESCRIZIONE", 220);
-                listView1.Columns.Add("PREZZO", 50);
-                listView1.Columns.Add("QTA", 40);
+                listView1.Columns.Add("ID", (int)(listView1.Width * 0.05));
+                listView1.Columns.Add("NOME", (int)(listView1.Width * 0.15));
+                listView1.Columns.Add("PRODUTTORE", (int)(listView1.Width * 0.15));
+                listView1.Columns.Add("DESCRIZIONE", (int)(listView1.Width * 0.20));
+                listView1.Columns.Add("PREZZO", (int)(listView1.Width * 0.10));
+                listView1.Columns.Add("PREZZO SCONT", (int)(listView1.Width * 0.10));
+                listView1.Columns.Add("EXTRA", (int)(listView1.Width * 0.15));
+                listView1.Columns.Add("QTA", (int)(listView1.Width * 0.10));
 
                 labelData.Visible = labelInfoAggiuntive.Visible = textInfoAggiuntive.Visible = monthCalendar1.Visible = false;
                 comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -43,7 +45,7 @@ namespace Borelli_Ecommerce {
             StampaElementi(listView1, carrello);
         }
         private void button2_Click(object sender, EventArgs e) {//inserimento rapido
-            prod[contRapid] = new ProdottoGenerico($"ID{contRapid}", $"NOME{contRapid}", $"PRODUTTORE{contRapid}", $"PRODOTTO MOLTO BELO{contRapid}", rand.Next(0, 999));
+            prod[contRapid] = new ProdottoElettronico($"ID{contRapid}", $"NOME{contRapid}", $"PRODUTTORE{contRapid}", $"PRODOTTO MOLTO BELO{contRapid}", rand.Next(0, 999), $"SPECIFICO{contRapid}");
             carrello.Aggiungi(prod[contRapid]);
             contRapid++;
             Form1_Load(sender, e);
@@ -92,10 +94,18 @@ namespace Borelli_Ecommerce {
         public static void StampaElementi(ListView listino, Carrello carr) {
             listino.Items.Clear();
             ProdottoGenerico[] prod = carr.Prod;
+            int[] qta = carr.Qta;
 
             for (int i = 0; i < prod.Length; i++) {
                 string[] temp = prod[i].ToString().Split(';');
-                ListViewItem item = new ListViewItem(temp);
+                string[] def = new string[temp.Length + 1];
+
+                for (int j = 0; j < temp.Length; j++) {
+                    def[j] = temp[j];
+                }
+
+                def[temp.Length] = $"{qta[i]}";
+                ListViewItem item = new ListViewItem(def);
                 listino.Items.Add(item);
             }
         }

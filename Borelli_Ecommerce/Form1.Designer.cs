@@ -143,9 +143,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(400, 429);
+            this.button2.Location = new System.Drawing.Point(581, 429);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(149, 54);
+            this.button2.Size = new System.Drawing.Size(169, 54);
             this.button2.TabIndex = 11;
             this.button2.Text = "INSERIMENTO RAPIDO [PRODOTTI DEFAULT]";
             this.button2.UseVisualStyleBackColor = true;
@@ -156,15 +156,15 @@
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(400, 12);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(477, 411);
+            this.listView1.Size = new System.Drawing.Size(531, 411);
             this.listView1.TabIndex = 12;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(573, 429);
+            this.button3.Location = new System.Drawing.Point(400, 429);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(149, 54);
+            this.button3.Size = new System.Drawing.Size(175, 54);
             this.button3.TabIndex = 13;
             this.button3.Text = "ELIMINA [SELEZIONANARE]";
             this.button3.UseVisualStyleBackColor = true;
@@ -172,9 +172,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(728, 429);
+            this.button4.Location = new System.Drawing.Point(756, 429);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(149, 54);
+            this.button4.Size = new System.Drawing.Size(175, 54);
             this.button4.TabIndex = 14;
             this.button4.Text = "SVUOTA";
             this.button4.UseVisualStyleBackColor = true;
@@ -235,7 +235,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 498);
+            this.ClientSize = new System.Drawing.Size(943, 498);
             this.Controls.Add(this.labelData);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.labelInfoAggiuntive);

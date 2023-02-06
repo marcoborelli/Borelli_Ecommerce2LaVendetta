@@ -90,11 +90,11 @@ namespace Borelli_Ecommerce {
             return (int)differenza.Days;
         }
         public override float CalcolaPrezzoFinale() {
+            float temp = base.CalcolaPrezzoFinale();
             if (CalcolaGiorniDifferenza() > 7) {
-                return this.Prezzo - ((this.Sconto * this.Prezzo) / 100);
-            } else {
-                return this.Prezzo;
+                return temp * ((100 - this.Sconto) / 100);
             }
+            return temp;
         }
         public void AggiungiIngredienti(string ingr) {
             if (this.NumeroIngredienti < MAXX) {

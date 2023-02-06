@@ -11,16 +11,17 @@ namespace Borelli_Ecommerce {
             this.Sconto = 3;
         }
         public override float CalcolaPrezzoFinale() {
+            float temp = base.CalcolaPrezzoFinale();
+
             if (CalcolaGiorno() % 2 == 0) {
-                return this.Prezzo - ((this.Sconto * this.Prezzo) / 100);
-            } else {
-                return this.Prezzo;
+                return temp * ((100 - this.Sconto) / 100);
             }
+            return temp;
         }
 
         private int CalcolaGiorno() {
             DateTime d = DateTime.Now;
-            return (int)d.DayOfYear;
+            return (int)d.Day;
         }
     }
 }

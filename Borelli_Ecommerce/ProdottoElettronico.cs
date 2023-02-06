@@ -41,11 +41,13 @@ namespace Borelli_Ecommerce {
 
         public override float CalcolaPrezzoFinale() {
             DateTime d = DateTime.Now;
+            float temp = base.CalcolaPrezzoFinale();
+
             if ($"{d.DayOfWeek}" == "Monday") {
-                return this.Prezzo - ((this.Sconto * this.Prezzo) / 100);
-            } else {
-                return this.Prezzo;
+                return temp * ((100 - this.Sconto) / 100);
             }
+            return temp;
+
         }
 
     }

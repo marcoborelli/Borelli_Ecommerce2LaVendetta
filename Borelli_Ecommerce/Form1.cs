@@ -75,6 +75,10 @@ namespace Borelli_Ecommerce {
                 carrello.Aggiungi(prod[contRapid]);
                 contRapid++;
 
+                textInfoAggiuntive.Height = 20;
+                textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = textInfoAggiuntive.Text = "";
+
+
             } else {
                 MessageBox.Show("Selezionare prima il tipo di prodotto");
             }
@@ -150,6 +154,9 @@ namespace Borelli_Ecommerce {
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
             labelData.Visible = monthCalendar1.Visible = false;
+
+            textInfoAggiuntive.Height= 20;
+            textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = textBox5.Text = textInfoAggiuntive.Text = "";
 
             if (comboBox1.Text == "ProdottoElettorinico") {
                 labelInfoAggiuntive.Text = "CODICE SPECIFICO";

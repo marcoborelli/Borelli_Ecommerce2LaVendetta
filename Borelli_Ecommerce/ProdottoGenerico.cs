@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borelli_Ecommerce {
-    public class ProdottoGenerico {
+    public class ProdottoGenerico : IEquatable<ProdottoGenerico> {
         private string _id, _nome, _produttore, _descrizione;
         private float _prezzo, _sconto;
 
@@ -70,7 +70,7 @@ namespace Borelli_Ecommerce {
                 InserisciSeStringaValida(ref _descrizione, value, "Descrizione");
             }
         }
-        //funzioni generali
+        /*funzioni generali*/
         public bool Equals(ProdottoGenerico p) {
             if (p == null) {
                 return false;
@@ -96,7 +96,7 @@ namespace Borelli_Ecommerce {
             }
         }
 
-        protected void SettaSeMaggioreDiZeroMinoreDiMax(ref float campo, float val, string nomeCampo, int max) {
+        protected void SettaSeMaggioreDiZeroMinoreDiMax(ref float campo, float val, string nomeCampo, float max) {
             if (val > 0 && val < max) {
                 campo = val;
             } else {

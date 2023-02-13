@@ -57,6 +57,7 @@
     <Compile Include="Penne.cs" />
     <Compile Include="ProdottiCancelleria.cs" />
     <Compile Include="ProdottoAlimentare.cs" />
+    <Compile Include="ProdottoCarrello.cs" />
     <Compile Include="ProdottoElettronico.cs" />
     <Compile Include="ProdottoGenerico.cs" />
     <Compile Include="Program.cs" />

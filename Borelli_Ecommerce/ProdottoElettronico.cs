@@ -43,7 +43,7 @@ namespace Borelli_Ecommerce {
             DateTime d = DateTime.Now;
             float temp = base.CalcolaPrezzoFinale();
 
-            if ($"{d.DayOfWeek}" == "Monday") {
+            if (d.DayOfWeek == DayOfWeek.Monday) {
                 return temp * ((100 - this.Sconto) / 100);
             }
             return temp;

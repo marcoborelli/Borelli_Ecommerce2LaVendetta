@@ -12,7 +12,6 @@ namespace Borelli_Ecommerce {
     public partial class Form1 : Form {
         int contRapid = 0;
         bool firsTime = true;
-        ProdottoGenerico[] prod = new ProdottoGenerico[999];
         Carrello carrello = new Carrello("CARRELLO1");
         Random rand = new Random();
 
@@ -45,16 +44,16 @@ namespace Borelli_Ecommerce {
             StampaElementi(listView1,labelPrezzo, carrello);
         }
         private void button2_Click(object sender, EventArgs e) {//inserimento rapido
-            prod[contRapid] = new ProdottoElettronico($"ID{contRapid}", $"NOME{contRapid}", $"PRODUTTORE{contRapid}", $"PRODOTTO MOLTO BELO{contRapid}", rand.Next(0, 999), $"SPECIFICO{contRapid}");
-            carrello.Aggiungi(prod[contRapid]);
+            ProdottoElettronico pe = new ProdottoElettronico($"ID{contRapid}", $"NOME{contRapid}", $"PRODUTTORE{contRapid}", $"PRODOTTO MOLTO BELO{contRapid}", rand.Next(0, 999), $"SPECIFICO{contRapid}");
+            carrello.Aggiungi(pe);
             contRapid++;
             Form1_Load(sender, e);
         }
         private void button1_Click(object sender, EventArgs e) {//inserisci normale
             if (!String.IsNullOrWhiteSpace(comboBox1.Text)) { /*se ho selezionato la combobox*/
-
+                ProdottoGenerico p=new ProdottoGenerico("TEMP","NOME");
                 if (comboBox1.Text == "ProdottoElettorinico") {
-                    prod[contRapid] = new ProdottoElettronico($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), $"{textInfoAggiuntive.Text}");
+                    p = new ProdottoElettronico($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), $"{textInfoAggiuntive.Text}");
                 } 
                 else if (comboBox1.Text == "ProdottoAlimentare") {
                     string[] temp = textInfoAggiuntive.Text.Split('\n');//creo array splittando grazie al ritorno a capo
@@ -63,16 +62,16 @@ namespace Borelli_Ecommerce {
                     }
 
                     DateTime d = monthCalendar1.SelectionRange.Start;
-                    prod[contRapid] = new ProdottoAlimentare($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), d, temp);
+                    p = new ProdottoAlimentare($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), d, temp);
                 } 
                 else if (comboBox1.Text == "Penna") {
-                    prod[contRapid] = new Penne($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), $"{textInfoAggiuntive.Text}");
+                    p = new Penne($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), $"{textInfoAggiuntive.Text}");
                 } 
                 else if (comboBox1.Text == "FoglioDiCarta") {
-                    prod[contRapid] = new FogliDiCarta($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), float.Parse(textInfoAggiuntive.Text));
+                    p = new FogliDiCarta($"{textBox1.Text}", $"{textBox2.Text}", $"{textBox3.Text}", $"{textBox4.Text}", float.Parse(textBox5.Text), float.Parse(textInfoAggiuntive.Text));
                 }
 
-                carrello.Aggiungi(prod[contRapid]);
+                carrello.Aggiungi(p);
                 contRapid++;
 
                 textInfoAggiuntive.Height = 20;
@@ -101,8 +100,7 @@ namespace Borelli_Ecommerce {
 
         public static void StampaElementi(ListView listino, Label labellina,Carrello carr) {
             listino.Items.Clear();
-            ProdottoGenerico[] prod = carr.Prod;
-            int[] qta = carr.Qta;
+            ProdottoCarrello[] prod = carr.Prod;
             float prezzoTot=0, prezzoScontato=0;
             bool dispElet = false;
 
@@ -112,19 +110,12 @@ namespace Borelli_Ecommerce {
                 }
                 string[] temp = prod[i].ToString().Split(';');
 
-                for (int j = 0; j < qta[i]; j++) {
+                for (int j = 0; j < prod[i].Qta; j++) {
                     prezzoTot += float.Parse(temp[4]);
                     prezzoScontato += float.Parse(temp[5]);
                 }
 
-                string[] def = new string[temp.Length + 1];
-
-                for (int j = 0; j < temp.Length; j++) {
-                    def[j] = temp[j];
-                }
-
-                def[temp.Length] = $"{qta[i]}";
-                ListViewItem item = new ListViewItem(def);
+                ListViewItem item = new ListViewItem(temp);
                 listino.Items.Add(item);
             }
 

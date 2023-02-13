@@ -7,27 +7,14 @@ using System.Threading.Tasks;
 namespace Borelli_Ecommerce {
     public class Carrello {
         private string _id;
-        private const int MAX = 999;
-        private ProdottoGenerico[] _prod;
-        private int[] _qta;
-        private int _numProdotti;
+        private List<ProdottoCarrello> _lista = new List<ProdottoCarrello>();
 
         public Carrello(string id) {
             this.Id = id;
-            _prod = new ProdottoGenerico[MAX];
-            _qta = new int[MAX];
-            Svuota();//inizializzo il vettore vuoto
+            Svuota();
         }
 
         /*properties*/
-        private int NumProdotti {
-            get {
-                return _numProdotti;
-            }
-            set {
-                SettaSeMaggioreDiZeroMinoreDiMax(ref  _numProdotti, value, "Numero Prodotti", MAX);
-            }
-        }
         public string Id {
             get {
                 return _id;
@@ -36,22 +23,9 @@ namespace Borelli_Ecommerce {
                 InserisciSeStringaValida(ref _id, value, "Id");
             }
         }
-        public int[] Qta {
+        public ProdottoCarrello[] Prod {
             get {
-                int[] temp = new int[NumProdotti];
-                for (int i = 0; i < NumProdotti; i++) {
-                    temp[i] = _qta[i];
-                }
-                return temp;
-            }
-        }
-        public ProdottoGenerico[] Prod {
-            get {
-                ProdottoGenerico[] temp = new ProdottoGenerico[NumProdotti];
-                for (int i = 0; i < NumProdotti; i++) {
-                    temp[i] = _prod[i];
-                }
-                return temp;
+                return _lista.ToArray();
             }
         }
         /*fine properties*/
@@ -62,10 +36,12 @@ namespace Borelli_Ecommerce {
         /*funzioni specifiche*/
         public void Aggiungi(ProdottoGenerico p) {
             if (p != null) {
-                int ind1 = Esiste(p);//prima verifico se già esiste
+                ProdottoCarrello pc = new ProdottoCarrello(p);/*devo trovare un modo migliore per farlo*/
+                
+                int indice = _lista.IndexOf(pc);
 
-                if (ind1 != -1) {
-                    _qta[ind1]++;
+                if (indice != -1) {
+                    _lista[indice].Qta++;
                 } else {
 
                     if (p.GetType() == typeof(ProdottoAlimentare)) {
@@ -75,53 +51,34 @@ namespace Borelli_Ecommerce {
                         }
                     }
 
-                    _prod[this.NumProdotti] = p;
-                    _qta[this.NumProdotti] = 1;
-                    this.NumProdotti++;
+                    _lista.Add(pc);
                 }
+
             } else {
                 throw new Exception("Inserire un prodotto valido");
             }
         }
         public void Rimuovi(ProdottoGenerico p) {
-            int ind1 = Esiste(p);
-            if (ind1 != -1) {
-                for (int i = ind1; i < _prod.Length - 1; i++) {
-                    _prod[i] = _prod[i + 1];
-                    _qta[i] = _qta[i + 1];
-                }
-
-                _prod[_prod.Length - 1] = null;
-                _qta[_qta.Length - 1] = 0;
-
-                this.NumProdotti--;
+            ProdottoCarrello pc = new ProdottoCarrello(p);
+            int indice= _lista.IndexOf(pc);
+            if (indice != -1) {
+                _lista.RemoveAt(indice);
             } else {
                 throw new Exception("Inserire un prodotto valido");
             }
         }
         public void Svuota() {
-            for (int i = 0; i < NumProdotti; i++) {
-                _prod[i] = null;
-                _qta[i] = 0;
-            }
-            this.NumProdotti = 0;
+            _lista.Clear();
         }
-        public int VisualizzaQtaProdotti(int ind) {
-            if (_qta[ind] != 0) {
-                return _qta[ind];
+        public float VisualizzaQtaProdotti(int ind) {
+            if (ind < _lista.Count) {
+                return _lista[ind].Qta;
             } else {
-                throw new Exception("Non è presente nessun valore a questo indice");
+                throw new Exception("Indice oltre il numero attuale di prodotti");
             }
         }
         /*fine funzioni specifiche*/
 
-        private int Esiste(ProdottoGenerico q) {
-            for (int i = 0; i < NumProdotti; i++) {
-                if (_prod[i].Equals(q))
-                    return i;
-            }
-            return -1;
-        }
         protected void InserisciSeStringaValida(ref string campo, string val, string perErrore) {
             if (!String.IsNullOrWhiteSpace(val)) {
                 campo = val;

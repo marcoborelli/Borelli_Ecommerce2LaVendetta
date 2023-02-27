@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borelli_Ecommerce {
-    public class FogliDiCarta : ProdottiCancelleria {
+    public class FogliDiCarta : ProdottiCancelleria/*, IEquatable<FogliDiCarta>*/ {
         private float _grammatura;
         public FogliDiCarta(string id, string nome, string produt, string descr, float prezzo, float grammat) : base(id, nome, produt, descr, prezzo) {
             this.Grammatura = grammat;

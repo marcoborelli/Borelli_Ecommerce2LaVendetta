@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borelli_Ecommerce {
-    public class ProdottoGenerico : IEquatable<ProdottoGenerico> {
+    public class ProdottoGenerico /*: IEquatable<ProdottoGenerico>*/ {
         private string _id, _nome, _produttore, _descrizione;
         private float _prezzo, _sconto;
 

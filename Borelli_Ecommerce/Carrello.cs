@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//using System.Windows.Forms;
+
 namespace Borelli_Ecommerce {
     public class Carrello {
         private string _id;
@@ -37,8 +39,9 @@ namespace Borelli_Ecommerce {
         public void Aggiungi(ProdottoGenerico p) {
             if (p != null) {
                 ProdottoCarrello pc = new ProdottoCarrello(p);/*devo trovare un modo migliore per farlo*/
-                
+
                 int indice = _lista.IndexOf(pc);
+                //MessageBox.Show($"{indice}");
 
                 if (indice != -1) {
                     _lista[indice].Qta++;
@@ -60,7 +63,7 @@ namespace Borelli_Ecommerce {
         }
         public void Rimuovi(ProdottoGenerico p) {
             ProdottoCarrello pc = new ProdottoCarrello(p);
-            int indice= _lista.IndexOf(pc);
+            int indice = _lista.IndexOf(pc);
             if (indice != -1) {
                 _lista.RemoveAt(indice);
             } else {

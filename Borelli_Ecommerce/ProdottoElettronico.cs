@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borelli_Ecommerce {
-    public class ProdottoElettronico : ProdottoGenerico {
+    public class ProdottoElettronico : ProdottoGenerico/*, IEquatable<ProdottoElettronico>*/ {
         private string _codiceModello;
 
         public ProdottoElettronico(string id, string nome, string produttore, string descr, float prezzo, string _codiceMod) : base(id, nome, produttore, descr, prezzo) {

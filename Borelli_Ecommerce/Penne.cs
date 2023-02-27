@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borelli_Ecommerce {
-    public class Penne : ProdottiCancelleria{
+    public class Penne : ProdottiCancelleria/*, IEquatable<Penne>*/ {
         private string _funzionamento;
         public Penne(string id, string nome, string produt, string descr, float prezzo, string funz) : base(id, nome, produt, descr, prezzo) {
             this.Funzionamento = funz;

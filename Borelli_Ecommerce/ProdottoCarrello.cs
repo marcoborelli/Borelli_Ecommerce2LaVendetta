@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Borelli_Ecommerce {
-    public class ProdottoCarrello : IEquatable<ProdottoGenerico> {
+    public class ProdottoCarrello : IEquatable<ProdottoCarrello> {
         private float _qta;
         ProdottoGenerico _prodotto;
 
@@ -46,14 +46,8 @@ namespace Borelli_Ecommerce {
         public override string ToString() {
             return $"{Prodotto.ToString()};{Qta}";
         }
-        public bool Equals(ProdottoGenerico p) {
-            if (p == null) {
-                return false;
-            } else if (p == Prodotto) {
-                return true;
-            } else {
-                return (p.Nome == Prodotto.Nome && p.Id == Prodotto.Id);
-            }
+        public bool Equals(ProdottoCarrello p) {
+            return Prodotto.Equals(p.Prodotto);
         }
         /*fine funzioni generali*/
     }

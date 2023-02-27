@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Borelli_Ecommerce {
-    public class ProdottoAlimentare : ProdottoGenerico {
+    public class ProdottoAlimentare : ProdottoGenerico/*, IEquatable<ProdottoAlimentare>*/ {
         private DateTime _dataScadenza;
         private const int MAXX = 10;
         private float _numeroIngredienti;
